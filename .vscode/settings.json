@@ -1,0 +1,15 @@
+{
+  // Live Server 포트 설정 (원하는 포트로 변경 가능)
+  "liveServer.settings.port": 5502,
+
+  // HTML 파일을 EUC-KR로 응답하도록 설정
+  "liveServer.settings.CustomContentType": {
+    "*.html": "text/html; charset=euc-kr"
+  },
+
+  // Live Server 자동 새로고침 기능 설정 (선택)
+  "liveServer.settings.wait": 100,
+
+  // Live Server 외부 접근 비활성화 (선택)
+  "liveServer.settings.useLocalIp": false
+}

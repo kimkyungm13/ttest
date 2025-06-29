@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .chat-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        position: relative;
+        /* 브라우저 전체 높이 */
+    }
+
+    .chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        background: #f9f9f9;
+    }
+
+    .message {
+        margin-bottom: 12px;
+        padding: 10px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-input {
+        padding: 10px;
+        border-top: 1px solid #ddd;
+        background: #fff;
+        display: flex;
+        align-items: center;
+    }
+
+    .chat-input textarea {
+        flex: 1;
+        resize: none;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        height: 60px;
+        box-sizing: border-box;
+    }
+
+    .chat-input button {
+        margin-left: 10px;
+        padding: 10px 16px;
+        font-size: 16px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .scroll-to-bottom {
+        position: absolute;
+        bottom: 80px;
+        /* input 위로 띄우기 */
+        right: 20px;
+        z-index: 10;
+        padding: 8px 12px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        font-size: 14px;
+        cursor: pointer;
+        display: none;
+        /* 기본은 숨김 */
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<body>
+    <div class="chat-wrapper">
+        <div class="chat-messages">
+            <!-- GPT의 답변들이 여기에 추가됨 -->
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <div class="message">안녕하세요!</div>
+            <div class="message">무엇을 도와드릴까요?</div>
+            <!-- 더 많은 메시지 -->
+        </div>
+        <button class="scroll-to-bottom" id="scrollBtn">▼ 최신 답변으로</button>
+        <div class="chat-input">
+            <textarea placeholder="메시지를 입력하세요..."></textarea>
+            <button>전송</button>
+        </div>
+    </div>
+    <script>
+        function scrollToBottom() {
+            const chat = document.querySelector('.chat-messages');
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        // 예시: 새로운 메시지를 추가한 뒤 호출
+        function appendMessage(text) {
+            const chat = document.querySelector('.chat-messages');
+            const msg = document.createElement('div');
+            msg.className = 'message';
+            msg.textContent = text;
+            chat.appendChild(msg);
+
+            scrollToBottom(); // 메시지 추가 후 스크롤 내리기
+        }
+
+        // 테스트용 메시지
+        appendMessage("안녕하세요, GPT입니다.");
+        appendMessage("답변이 길어질 때 자동으로 아래로 스크롤됩니다.");
+
+        const chatBox = document.getElementById('chatBox');
+        const scrollBtn = document.getElementById('scrollBtn');
+
+        // 스크롤 감지
+        chatBox.addEventListener('scroll', () => {
+            const isAtBottom = chatBox.scrollTop + chatBox.clientHeight >= chatBox.scrollHeight - 10;
+
+            if (!isAtBottom) {
+                scrollBtn.style.display = 'block';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        });
+
+        // 버튼 클릭 시 스크롤 아래로
+        scrollBtn.addEventListener('click', () => {
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+
+    </script>
+
+</body>
+
+</html>
